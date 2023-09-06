@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20230906203507",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "routine",
+  "fields": [
+    {
+      "fieldName": "selectedDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "routineType",
+      "fieldType": "RoutineType",
+      "fieldValues": "MORNING (Morning),EVENING (Evening)"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Routine",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "addedBy",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "routine",
+      "ownerSide": true,
+      "relationshipName": "product",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}
