@@ -152,6 +152,7 @@ public class Routine implements Serializable {
             "id=" + getId() +
             ", selectedDate='" + getSelectedDate() + "'" +
             ", routineType='" + getRoutineType() + "'" +
+            ", products='" + getProducts() + "'" +
             "}";
     }
 }
