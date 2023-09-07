@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Add Product</title>
+    <link rel="stylesheet" href="./product.css">
+    <script src="./add.js" async defer></script>
+
+    <style>
+        /* dropdown menu */
+        .use-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .use-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #c2a6cd;;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .use-dropdown:hover .use-dropdown-content {
+            display: block;
+        }
+
+        .use-dropdown-content a {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .use-dropdown-content a:hover {
+            background-color: #c2a6cd;;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="left-links">
+                <ul>
+                    <li id="logo">RadiantRoutine</li>
+                    <li><a href="./main.html">Home</a></li>
+                    <li class="use-dropdown">
+                        <a href="" id="use-dropdown-trigger">My Products</a>
+                        <div class="use-dropdown-content" id="useDropdown">
+                            <a href="./usage.html?usage=CURRENTLY_USING">Currently Using</a>
+                            <a href="./usage.html?usage=NOT_USING">Not Using</a>
+                            <a href="./products.html">All Products</a>
+                        </div>
+                    </li>
+                    <li><a href="./addproduct.html">Add Product</a></li>
+                </ul>
+            </div>
+            <div class="right-links">
+                <ul>
+                    <li>
+                        <form id="search-form">
+                            <input type="text" id="search-input" placeholder="Search for a video">
+                            <button type="submit">Search</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <h1>Add a New Product</h1>
+    <section id="section">
+        <div id='post'></div>
+        <form id="add-product-form" enctype="multipart/form-data">
+            <label for="name">Product Name:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="brand">Product Brand:</label><br>
+            <input type="text" id="brand" name="brand"><br>
+            <label for="productType">Product Type:</label><br>
+            <select id="productType" name="productType">
+                <option value="TONER">Toner</option>
+                <option value="ESSENCE">Essence</option>
+                <option value="SERUM">Serum</option>
+                <option value="EMULSION">Emulsion</option>
+                <option value="MOISTURIZER">Moisturizer</option>
+                <option value="OIL">Oil</option>
+                <option value="EYE_CREAM">Eye Cream</option>
+                <option value="MASK">Mask</option>
+                <option value="SUNSCREEN">Sunscreen</option>
+            </select><br>
+            <label for="image">Product Image:</label><br>
+            <input type="file" id="image" name="image" accept="image/*"><br>
+            <label for="usageType">Product Usage:</label><br>
+            <select id="usageType" name="usageType">
+                <option value="CURRENTLY_USING">Currently Using</option>
+                <option value="NOT_USING">Not Using</option>
+            </select><br>
+            <input type="submit" onclick="doPostOfForm(event)" value="Add Product">
+          </form>
+    </section>
+
+    <script>
+        // JavaScript to handle the dropdown menu
+        const useDropdownTrigger = document.getElementById("use-dropdown-trigger");
+        const useDropdown = document.getElementById("useDropdown");
+
+        let isDropdownHovered = false;
+
+        useDropdownTrigger.addEventListener("mouseenter", function () {
+            isDropdownHovered = true;
+            useDropdown.style.display = "block";
+        });
+
+        useDropdown.addEventListener("mouseleave", function () {
+            isDropdownHovered = false;
+            useDropdown.style.display = "none";
+        });
+
+        document.addEventListener("click", function () {
+            if (!isDropdownHovered) {
+                useDropdown.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
+
+
