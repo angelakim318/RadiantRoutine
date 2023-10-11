@@ -14,13 +14,12 @@ public class User {
 
     private String firstName;
 
-    @Column(unique = true)
     private String username;
 
     private String password;
 
     // Define relationship with products
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Product> products = new ArrayList<>();
 
     // Define relationship with routines

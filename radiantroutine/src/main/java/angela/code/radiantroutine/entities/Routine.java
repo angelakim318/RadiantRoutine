@@ -16,11 +16,21 @@ public class Routine {
     private LocalDate date;
 
     // Define morning routine as a set of products
-    @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "morning_routine_product",
+            joinColumns = @JoinColumn(name = "morning_routine_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private Set<Product> morningRoutine = new HashSet<>();
 
     // Define evening routine as set of products
-    @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "evening_routine_product",
+            joinColumns = @JoinColumn(name = "evening_routine_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private Set<Product> eveningRoutine = new HashSet<>();
 
     @ManyToOne

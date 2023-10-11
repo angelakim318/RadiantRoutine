@@ -22,9 +22,11 @@ public class Product {
     @Lob
     private byte[] image;
 
-    @ManyToOne
-    @JoinColumn(name = "routine_id")
-    private Routine routine;
+    @ManyToMany(mappedBy = "morningRoutine")
+    private Set<Routine> morningRoutines = new HashSet<>();
+
+    @ManyToMany(mappedBy = "eveningRoutine")
+    private Set<Routine> eveningRoutines = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -71,12 +73,20 @@ public class Product {
         this.image = image;
     }
 
-    public Routine getRoutine() {
-        return routine;
+    public Set<Routine> getMorningRoutines() {
+        return morningRoutines;
     }
 
-    public void setRoutine(Routine routine) {
-        this.routine = routine;
+    public void setMorningRoutines(Set<Routine> morningRoutines) {
+        this.morningRoutines = morningRoutines;
+    }
+
+    public Set<Routine> getEveningRoutines() {
+        return eveningRoutines;
+    }
+
+    public void setEveningRoutines(Set<Routine> eveningRoutines) {
+        this.eveningRoutines = eveningRoutines;
     }
 
     public User getUser() {

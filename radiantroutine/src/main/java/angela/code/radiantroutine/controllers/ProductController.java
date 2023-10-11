@@ -32,9 +32,17 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    @GetMapping("/{productId}")
+    public Product getProductById(@PathVariable Long productId) {
+        return productService.getProductById(productId);
+    }
+
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestParam Long userId, @RequestBody Product product) {
         User user = userService.getUserById(userId);
+        if(user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         Product createdProduct = productService.createProduct(user, product);
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }

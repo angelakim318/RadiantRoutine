@@ -2,7 +2,9 @@ package angela.code.radiantroutine.services;
 
 import angela.code.radiantroutine.entities.Product;
 import angela.code.radiantroutine.entities.User;
+import angela.code.radiantroutine.exceptions.UserNotFoundException;
 import angela.code.radiantroutine.repositories.ProductRepository;
+import angela.code.radiantroutine.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,12 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
+    private final UserRepository userRepository;
+
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, UserRepository userRepository) {
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Product> getAllProducts(User user) {
@@ -27,7 +32,12 @@ public class ProductService {
     }
 
     public Product createProduct(User user, Product product) {
+        if(user == null) {
+            throw new UserNotFoundException("User not found");
+        }
+        product.setUser(user);
         user.getProducts().add(product);
+        userRepository.save(user);
         return productRepository.save(product);
     }
 
