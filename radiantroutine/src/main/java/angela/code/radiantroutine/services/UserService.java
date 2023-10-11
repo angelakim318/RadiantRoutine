@@ -1,8 +1,10 @@
 package angela.code.radiantroutine.services;
 
 import angela.code.radiantroutine.entities.User;
+import angela.code.radiantroutine.exceptions.UsernameAlreadyExistsException;
 import angela.code.radiantroutine.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +19,14 @@ public class UserService {
 
     public User getUserById(Long userId) {
         return userRepository.findById(userId).orElse(null);
+    }
+
+    public User createUser(User user) {
+        try {
+            return userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            throw new UsernameAlreadyExistsException("Username is already taken.");
+        }
     }
 
     public User updateUser(Long userId, User updatedUser) {
