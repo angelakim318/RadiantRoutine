@@ -23,7 +23,7 @@ public class User {
     private List<Product> products = new ArrayList<>();
 
     // Define relationship with routines
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Routine> routines = new ArrayList<>();
 
 
